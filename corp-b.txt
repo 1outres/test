@@ -1,0 +1,69 @@
+hostname CorpB-RT
+!
+!
+no ip domain lookup
+!
+!
+vtp mode transparent
+!
+vlan 10
+!
+!
+!
+interface Tunnel1
+ ip address 10.0.0.1 255.255.255.252
+ tunnel source FD00:1::4
+ tunnel mode ipv6
+ tunnel destination FD00:1::2
+!
+interface GigabitEthernet0
+ switchport access vlan 10
+ no ip address
+!
+interface GigabitEthernet1
+ switchport access vlan 10
+ no ip address
+!
+interface GigabitEthernet2
+ switchport access vlan 10
+ no ip address
+!
+interface GigabitEthernet3
+ switchport access vlan 10
+ no ip address
+!
+interface GigabitEthernet4
+ switchport access vlan 10
+ no ip address
+!
+interface GigabitEthernet5
+ switchport access vlan 10
+ no ip address
+!
+interface GigabitEthernet6
+ switchport access vlan 10
+ no ip address
+!
+interface GigabitEthernet7
+ switchport access vlan 10
+ no ip address
+!
+interface GigabitEthernet8
+ no ip address
+ duplex auto
+ speed auto
+ ipv6 address FD00:1::4/64
+!
+interface Vlan10
+ ip address 192.168.10.254 255.255.255.0
+!
+router ospf 1
+ router-id 10.0.0.1
+ passive-interface Vlan10
+ network 10.0.0.0 0.0.0.3 area 0
+ network 192.168.10.0 0.0.0.255 area 0
+!
+line con 0
+ logging synchronous
+!
+end
